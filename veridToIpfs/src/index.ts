@@ -21,7 +21,7 @@ async function checkIfFileIsDownloaded(downloadPath: string): Promise<{
   path: string;
 }> {
   await new Promise((resolve, reject) => {
-    setTimeout(resolve, 2000);
+    setTimeout(resolve, 1000);
   });
   const files = await fs.readdir(downloadPath);
   const file = path.resolve(downloadPath, "" + files[0]);
@@ -77,7 +77,7 @@ const downloadPathArr: string[] = new Array();
 
 const pageArr = new Array();
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 8; i++) {
   const browser = await puppeteer.launch({
     headless: false,
     executablePath: CHROME_PATH,
@@ -119,13 +119,13 @@ for (const name in names) {
       console.log("verid: ", verid);
       if (veridCid[verid] === undefined) {
         console.log("passed");
-        if (i % 6 === 5) {
+        if (i % 8 === 7) {
           await Promise.all(pagePromises);
           pagePromises = new Array();
         }
 
-        const downloadPath = downloadPathArr[i % 6];
-        const page = pageArr[i % 6];
+        const downloadPath = downloadPathArr[i % 8];
+        const page = pageArr[i % 8];
 
         async function loadPage() {
           const version = versions[j];
@@ -151,7 +151,7 @@ for (const name in names) {
                   waitForPage();
                   setTimeout(() => {
                     reject();
-                  }, 30000);
+                  }, 20000);
                 }
               );
               await waitForPagePromise;
