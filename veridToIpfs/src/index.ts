@@ -77,7 +77,7 @@ const downloadPathArr: string[] = new Array();
 
 const pageArr = new Array();
 
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < 7; i++) {
   const browser = await puppeteer.launch({
     headless: false,
     executablePath: CHROME_PATH,
@@ -119,13 +119,13 @@ for (const name in names) {
       console.log("verid: ", verid);
       if (veridCid[verid] === undefined) {
         console.log("passed");
-        if (i % 8 === 7) {
+        if (i % 7 === 6) {
           await Promise.all(pagePromises);
           pagePromises = new Array();
         }
 
-        const downloadPath = downloadPathArr[i % 8];
-        const page = pageArr[i % 8];
+        const downloadPath = downloadPathArr[i % 7];
+        const page = pageArr[i % 7];
 
         async function loadPage() {
           const version = versions[j];
@@ -168,7 +168,7 @@ for (const name in names) {
             [verid]: cid,
           });
         }
-        
+
         pagePromises.push(loadPage());
         i++;
       }
