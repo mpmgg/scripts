@@ -117,14 +117,17 @@ async function fetchVersions(id: any) {
     console.log(e);
   }
 }
+const fetchVersionsPromises: Promise<void>[] = new Array();
 for (const name in names) {
   const id = names[name].spigot;
   console.log(id);
-  fetchVersions(id);
+  fetchVersionsPromises.push(fetchVersions(id));
   await new Promise((resolve, reject) => {
     setTimeout(resolve, 50);
   });
 }
+
+await fetchVersionsPromises;
 
 for (const version of versions) {
   const verid = version.id;
