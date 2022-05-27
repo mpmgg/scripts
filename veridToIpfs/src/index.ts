@@ -122,7 +122,7 @@ for (const name in names) {
   console.log(id);
   fetchVersions(id);
   await new Promise((resolve, reject) => {
-    setTimeout(resolve, 10);
+    setTimeout(resolve, 50);
   });
 }
 
@@ -162,7 +162,7 @@ for (const version of versions) {
           waitForPage();
           setTimeout(() => {
             reject();
-          }, 30000);
+          }, 20000);
         });
         await waitForPagePromise;
       } catch (e) {
