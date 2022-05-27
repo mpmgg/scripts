@@ -112,7 +112,10 @@ async function fetchVersions(id: any) {
     const res = await fetch(
       `https://api.spiget.org/v2/resources/${id}/versions?size=9999`
     );
-    versions.push({ plugId: id, ...(await res.json()) });
+    const json = await res.json();
+    for (let i = 0; i < json.length; i++) {
+      versions.push({ plugId: id, ...json[i] });
+    }
   } catch (e: any) {
     console.log(e);
   }
