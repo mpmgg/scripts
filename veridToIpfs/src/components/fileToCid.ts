@@ -16,7 +16,8 @@ export default async function fileToCid(
       const blob = new Blob([file.data]);
       const cid = await client.storeBlob(blob);
 
-      fs.emptyDir(downloadPath);
+      console.log("Emptying download directory: " + downloadPath);
+      await fs.emptyDir(downloadPath);
 
       return cid;
     } catch (error) {
